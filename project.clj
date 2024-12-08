@@ -1,4 +1,4 @@
-(defproject pipelines "0.1.0"
+(defproject pipelines "0.1.1"
   :description "Provides a pipeline operator"
   :url "https://github.com/Evan-Hock/pipelines"
   :license {:name "GPL-3.0"

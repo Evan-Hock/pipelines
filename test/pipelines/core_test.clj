@@ -1,4 +1,5 @@
 (ns pipelines.core-test
+  (:require [clojure.string :as str])
   (:require [clojure.test :refer [deftest testing is]])
   (:require [pipelines.core :refer [|>]]))
 
@@ -8,7 +9,8 @@
     (is (= 0 (|> 0)))
     (is (= "string" (|> "string")))
     (is (= :keyword (|> :keyword)))
-    (is (= '(l i s t) (|> '(l i s t))))))
+    (is (= '(l i s t) (|> '(l i s t))))
+    (is (= [:v :e :c] (|> [:v :e :c])))))
 
 
 (deftest simple-pipeline-tests
@@ -35,3 +37,20 @@
   (testing "Pipelines with underscores substitute the arguments correctly"
     (is (= 9 (|> 20 (quot _ 2) (- _ 1))))
     (is (= 2401 (|> 7 (* _ _) (* _ _))))))
+
+
+(deftest vector-pipeline-tests
+  (testing "Vector pipelines substitute the arguments correctly"
+    (is
+     (= "3"
+        (|> "asdf1234jkl\nlkj4321fdsa"
+            [:first (str/replace #"[A-Za-z]" "")]
+            [1 (str/split #"\n")]
+            [:last (first)]
+            [:first (nth 2)]
+            [:first str])))
+    (is
+     (= 1212
+        (|> #"(\d+)"
+            [2 (str/replace "12" "$1$1")]
+            Integer/parseInt)))))

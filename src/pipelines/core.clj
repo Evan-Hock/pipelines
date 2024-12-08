@@ -35,12 +35,18 @@
               (do
                 (assert (= (count form) 2) "Form specifications must be vectors of length 2.")
                 (let [[threading-mode form] form]
-                  (case threading-mode
-                    :first (thread-nth 1 x form)
-                    :last (thread-last x form)
-                    (do
-                      (assert (and (integer? threading-mode) (>= threading-mode 1)) "Threading mode must be an integer and greater than or equal to 1.")
-                      (thread-nth threading-mode x form)))))
+                  (assert
+                   (or (= :first threading-mode)
+                       (= :last threading-mode)
+                       (and (integer? threading-mode)
+                            (>= threading-mode 1)))
+                   "Threading mode is either :first, :last, or an integer greater than 0.")
+                   (if (seq? form)
+                     (case threading-mode
+                       :first (thread-nth 1 x form)
+                       :last (thread-last x form)
+                       (thread-nth threading-mode x form))
+                     (list form x))))
 
               (seq? form)
               (if (boolean (some underscore? form))
