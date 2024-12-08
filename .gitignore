@@ -12,3 +12,6 @@ pom.xml.asc
 .hgignore
 .hg/
 **/.calva/repl.calva-repl
+/.calva
+/.clj-kondo
+/.lsp
