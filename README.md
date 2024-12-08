@@ -9,7 +9,7 @@ Adds pipelines to Clojure.
 In Lein, under your `defproject` declaration in `project.clj`:
 
 ```clj
-:dependencies [[pipelines.core "0.1.0"]]
+:dependencies [[pipelines.core "0.1.1"]]
 ```
 
 In your `ns` declaration:
@@ -44,7 +44,7 @@ and
     (reduce #(+ (* 2 %1) %2) 0))
 ```
 
-mean the same thing: the previous form is threaded as the last argument in the following form.
+mean the same thing: each previous form is threaded as the last argument in the following form.
 
 The `|>` pipeline operator adds two new features for specifying where arguments go in pipelines.
 
