@@ -14,4 +14,4 @@ pom.xml.asc
 **/.calva/repl.calva-repl
 /.calva
 /.clj-kondo
-/.lsp
+/.lsp/.cache

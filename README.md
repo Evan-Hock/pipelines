@@ -1,22 +1,49 @@
 # pipelines
 
-A Clojure library designed to ... well, that part is up to you.
+Adds pipelines to Clojure.
 
 ## Usage
 
-FIXME
+### Importing
 
-## License
+In Lein, under your `defproject` declaration in `project.clj`:
 
-Copyright © 2024 FIXME
+```clj
+:dependencies [[pipelines.core "0.1.0"]]
+```
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+In your `ns` declaration:
 
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+```clj
+(:use pipelines.core)
+```
+
+The module only exports the `|>` symbol.
+
+
+### What it does?
+
+This thing adds a macro for writing pipelines à la Elixir, although with more flexibility than
+either Elixir's pipelines or Clojure's threading macros.
+
+For basic uses, it behaves the same as Clojure's "thread last" macro, e.g.
+
+```clj
+(|> s
+    clojure.string/split-lines
+    (map #(Integer/parseInt %))
+    (reduce #(+ (* 2 %1) %2) 0))
+```
+
+and
+
+```clj
+(->> s
+    clojure.string/split-lines
+    (map #(Integer/parseInt %))
+    (reduce #(+ (* 2 %1) %2) 0))
+```
+
+mean the same thing: the previous form is threaded as the last argument in the following form.
+
+The `|>` pipeline operator adds two new features for writing pipelines.
