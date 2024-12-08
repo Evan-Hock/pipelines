@@ -6,10 +6,10 @@ All notable changes to this project will be documented in this file. This change
 
 * Underscore substitution now generates a `let` binding
 
-
 ### Fixed
 
 * Vector forms now follow the same rules as the thread first/thread last macros (save for where the argument is threaded)
+
 
 ## 0.1.0
 ### Added
