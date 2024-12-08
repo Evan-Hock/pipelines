@@ -71,4 +71,8 @@ will be substituted.
 ```
 
 The possible values for the first element are `:first`, `:last`, or an integer greater than 0 (if the integer is greater
-than or equal to the number of elements in the form, it will be treated the same as `:last`). 
+than or equal to the number of elements in the form, it will be treated the same as `:last`).
+
+This feature does come with an unfortunate consequence: you can no longer pipe into vector literals. If you
+wish to do this, you can just surround your vector literal in parentheses (or put it in a vector specifier, &c) and it
+will work as you probably intended.
