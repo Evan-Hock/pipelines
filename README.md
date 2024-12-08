@@ -46,4 +46,29 @@ and
 
 mean the same thing: the previous form is threaded as the last argument in the following form.
 
-The `|>` pipeline operator adds two new features for writing pipelines.
+The `|>` pipeline operator adds two new features for specifying where arguments go in pipelines.
+
+The first is underscore substitution. In the pipeline, you may write any number of underscores,
+and the preceding form will replace each underscore.
+
+```clj
+(|> 7
+    (* _ _ _)
+    (quot _ 7))
+```
+
+will evaluate to 49.
+
+
+The second is vector specification. If a form is a vector instead of a list, it is expected to
+be a two-element vector, and the first element will determine where in the form (that is the second element) the argument
+will be substituted.
+
+```clj
+(|> s
+    [:first (clojure.string/split #"\s+")]
+    (map #(Integer/parseInt %)))
+```
+
+The possible values for the first element are `:first`, `:last`, or an integer greater than 0 (if the integer is greater
+than or equal to the number of elements in the form, it will be treated the same as `:last`). 

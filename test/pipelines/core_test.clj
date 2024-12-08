@@ -46,7 +46,7 @@
         (|> "asdf1234jkl\nlkj4321fdsa"
             [:first (str/replace #"[A-Za-z]" "")]
             [1 (str/split #"\n")]
-            [:last (first)]
+            [2 (first)] ;; The same as :last, since 2 >= 1
             [:first (nth 2)]
             [:first str])))
     (is
