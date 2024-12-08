@@ -11,7 +11,17 @@
   (= '_ symbol))
 
 (defmacro |>
-  "Pipeline operator." 
+  "Pipeline operator.
+   
+  Functions like the standard \"thread last\" operator, but with some extensions:
+  * If a form is a vector, it is expected to have two members, and the first member
+    should be either `:first`, `:last`, or a number greater than or equal to 1. This will determine the piping mode,
+    that is, which argument into a form the preceding form should be inserted into.
+  * If a form is a list, the preceding form will be inserted as the last element,
+    unless that form contains underscores. If that form contains underscores,
+    they will be substituted with the preceding form.
+  * If a form is not a list, it will be converted into a list, and the preceding form will
+    be appended as the last element (this is the same behaviour as the `->>` macro)." 
   [x & forms]
   (loop [x x, forms forms]
     (if (empty? forms)
