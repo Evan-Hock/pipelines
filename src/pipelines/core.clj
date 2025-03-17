@@ -5,7 +5,7 @@
     `(~@prefix ~x ~@suffix)))
 
 (defn- thread-last [x form]
-  `(~(first form) ~@(next form) ~x))
+  `(~@form ~x))
 
 (defn- underscore? [symbol]
   (= '_ symbol))
